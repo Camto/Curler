@@ -261,13 +261,16 @@ function expect(type, extra) { // When you expect some data to come up.
 					
 					var fun_arguments = [];
 					
-					while(prog[prog] != "}") {
+					while(prog[prog_c] != "}") {
 						
 						fun_arguments.push(expect("value"));
 						
 					}
 					
 					var definition = fun_arguments.pop();
+					
+					prog_c++;
+					skip();
 					
 					return ["sugar", "fun", fun_arguments, definition];
 				
