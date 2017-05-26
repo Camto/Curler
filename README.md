@@ -6,19 +6,19 @@ Lisp inspired PL w/ curly brackets.
 
 "comments can just be strings that float around"
 
-{set fact {fun x (
+{<b>set</b> <i>fact</i> {<b>fun</b> <i>x</i> (
 	
-	{if {= x 0} (
+	{<b>if</b> {<i>= x</i> 0} (
 		
-		{give 1}
+		{<b>give</b> 1}
 		
 	) (
 		
-		{give {* x {fact {- x 1}}}}
+		{<b>give</b> {<i>* x</i> {<i>fact</i> {<i>- x</i> 1}}}}
 		
 	)}
 	
 )}}
 
-{print {fact 5}} "outputs `120`"
+{<i>print</i> {<i>fact</i> 5}} "outputs `120`"
 </pre>
