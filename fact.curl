@@ -1,7 +1,3 @@
-# Curler
-Lisp inspired PL w/ curly brackets.
-
-<pre>
 "this is example code for a factorial!"
 
 "comments can just be strings that float around"
@@ -21,4 +17,3 @@ Lisp inspired PL w/ curly brackets.
 )}}
 
 {print {fact 5}} "outputs `120`"
-</pre>

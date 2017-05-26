@@ -324,7 +324,7 @@ function skip() { // Skip over whitespace!
 		
 	) (
 		
-		{give {* x {fib {- x 1}}}}
+		{give {* x {fact {- x 1}}}}
 		
 	)}
 	
