@@ -81,8 +81,10 @@ function expect(type, extra) { // When you expect some data to come up.
 			switch(function_name[1]) { // ...or it could be syntactic 'sugar' in deguise!
 				
 				case "set":
+				case "local":
 				case "class":
 				case "obj":
+				case "prop":
 				case "fun":
 				case "if":
 				case "give":
@@ -216,7 +218,7 @@ function expect(type, extra) { // When you expect some data to come up.
 			
 			var name = "";
 			
-			while(!/[\s\{\}\(\)]/.test(prog[prog_c])) {
+			while(!/[\s\{\}\(\)\[\]\"]/.test(prog[prog_c])) {
 				
 				name += prog[prog_c];
 				prog_c++;
@@ -241,21 +243,145 @@ function expect(type, extra) { // When you expect some data to come up.
 					
 					return ["sugar", "set", name, data];
 				
+				case "local":
+					
+					var name = expect("name");
+					var data = expect("value");
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "local", name, data];
+				
 				case "class":
 					
-					return ["sugar", "class", class_arguments, class_constructor, methods];
+					var name = expect("name");
+					
+					var class_constructor = expect("sugar", "constructor");
+					
+					methods = [];
+					
+					while(prog[prog_c] != "}") {
+						
+						methods.push(expect("sugar", "method"));
+						
+					}
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "class", name, class_constructor, methods];
+				
+				case "constructor":
+					
+					prog_c++;
+					skip();
+					
+					var constructor_arguments = [];
+					
+					while(prog[prog_c] != "}") {
+						
+						constructor_arguments.push(expect("value"));
+						
+					}
+					
+					var definition = constructor_arguments.pop();
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "constructor", constructor_arguments, definition];
 				
 				case "method":
 					
-					return [name, method_arguments, definition];
+					prog_c++;
+					skip();
+					
+					var name = expect("name");
+					
+					method_arguments = [];
+					
+					while(prog[prog_c] != "}") {
+						
+						method_arguments.push(expect("value"));
+						
+					}
+					
+					var definition = method_arguments.pop();
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "method", name, method_arguments, definition];
+				
+				case "call":
+					
+					var name = expect("name");
+					
+					var method = expect("name");
+					
+					var call_arguments = [];
+					
+					while(prog[prog_c] != "}") {
+						
+						call_arguments.push(expect("value"));
+						
+					}
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "call", name, method, call_arguments];
 				
 				case "obj":
 					
-					return ["sugar", "obj", name, obj_arguments];
+					var name = expect("name");
+					
+					var object = expect("name");
+					
+					var obj_arguments = [];
+					
+					while(prog[prog_c] != "}") {
+						
+						obj_arguments.push(expect("value"));
+						
+					}
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "obj", name, object, obj_arguments];
 				
 				case "prop":
 					
-					return ["sugar", "property", name, property, data];
+					var property = expect("name");
+					
+					var data = expect("value");
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "prop", property, data];
+				
+				case "g_prop":
+					
+					var property = expect("name");
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "g_prop", property];
+				
+				case "f_prop":
+					
+					var name = expect("name");
+					
+					var property = expect("name");
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "f_prop", name, property];
 				
 				case "fun":
 					
