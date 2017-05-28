@@ -84,7 +84,10 @@ function expect(type, extra) { // When you expect some data to come up.
 				case "local":
 				case "class":
 				case "obj":
+				case "call":
 				case "prop":
+				case "g_prop":
+				case "f_prop":
 				case "fun":
 				case "if":
 				case "give":
@@ -218,7 +221,7 @@ function expect(type, extra) { // When you expect some data to come up.
 			
 			var name = "";
 			
-			while(!/[\s\{\}\(\)\[\]\"]/.test(prog[prog_c])) {
+			while(!/[\s\{\}\(\)\[\]"]/.test(prog[prog_c])) {
 				
 				name += prog[prog_c];
 				prog_c++;
