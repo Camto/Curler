@@ -90,6 +90,7 @@ function expect(type, extra) { // When you expect some data to come up.
 				case "f_prop":
 				case "fun":
 				case "if":
+				case "loop":
 				case "give":
 					
 					return expect("sugar", function_name[1]);
@@ -413,6 +414,16 @@ function expect(type, extra) { // When you expect some data to come up.
 					skip();
 					
 					return ["sugar", "if", condition, if_code, else_code];
+				
+				case "loop":
+					
+					var condition = expect("value");
+					var looped_block = expect("mini-prog");
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "loop", condition, looped_block];
 				
 				case "give":
 					
