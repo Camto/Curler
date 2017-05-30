@@ -4,13 +4,13 @@
 
 {set fact {fun x (
 	
-	{if {= x 0} (
+	{if {= {arg x} 0} (
 		
 		{give 1}
 		
 	) (
 		
-		{give {* x {fact {- x 1}}}}
+		{give {* {arg x} {fact {- {arg x} 1}}}}
 		
 	)}
 	

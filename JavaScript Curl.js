@@ -17,9 +17,32 @@ function JSON_to_Curler(JSONed) {
 	var code = JSON.parse(JSONed);
 	indentation = 0;
 	
-	return compile(code);
+	return standard_library + compile(code);
 	
 }
+
+standard_library = `Curler = {};
+
+Curler["print"] = function(a) {console.log(a); return a;};
+
+Curler["+"] = function(a, b) {return a + b;};
+Curler["-"] = function(a, b) {return a - b;};
+Curler["*"] = function(a, b) {return a * b;};
+Curler["/"] = function(a, b) {return a / b;};
+
+Curler["^"] = function(a, b) {return a**b;};
+Curler["v"] = function(a) {return Math.sqrt(a);};
+
+Curler["="] = function(a, b) {return a === b;}
+Curler["!="] = function(a, b) {return a !== b;}
+Curler["<"] = function(a, b) {return a < b;}
+Curler[">"] = function(a, b) {return a > b;}
+Curler["<="] = function(a, b) {return a <= b;}
+Curler[">="] = function(a, b) {return a >= b;}
+
+
+
+`
 
 function compile(data) {
 	

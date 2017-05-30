@@ -8,13 +8,13 @@ Lisp inspired PL w/ curly brackets.
 
 {<b>set</b> <i>fact</i> {<b>fun</b> <i>x</i> (
 	
-	{<b>if</b> {<i>= x</i> 0} (
+	{<b>if</b> {<i>=</i> {<i>arg x</i>} 0} (
 		
 		{<b>give</b> 1}
 		
 	) (
 		
-		{<b>give</b> {<i>* x</i> {<i>fact</i> {<i>- x</i> 1}}}}
+		{<b>give</b> {<i>*</i> {<i>arg x</i>} {<i>fact</i> {<i>-</i> {<i>arg x</i>} 1}}}}
 		
 	)}
 	
