@@ -2,9 +2,9 @@
 	
 	{ x y r (
 		
-		{prop x x}
-		{prop y y}
-		{prop r r}
+		{prop x {arg x}}
+		{prop y {arg y}}
+		{prop r {arg r}}
 		
 	)}
 	
@@ -17,16 +17,16 @@
 	
 	{move x y (
 		
-		{prop x {+ {g_prop x} x}}
-		{prop y {+ {g_prop y} y}}
+		{prop x {+ {g_prop x} {arg x}}}
+		{prop y {+ {g_prop y} {arg y}}}
 		
 	)}
 	
 	{collide ball_2 (
 		
-		{local dist {v {+ {** {- {g_prop x} {f_prop ball_2 x}}} {** {- {g_prop y} {f_prop ball_2 y}}}}}}
+		{local dist {v {+ {** {- {g_prop x} {f_prop {arg ball_2} x}}} {** {- {g_prop y} {f_prop {arg ball_2} y}}}}}}
 		
-		{if {>= {+ {g_prop r} {f_prop ball_2 r}} dist} (
+		{if {>= {+ {g_prop r} {f_prop {arg ball_2} r}} {g_local dist}} (
 			
 			{give true}
 			

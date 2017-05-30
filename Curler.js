@@ -82,7 +82,9 @@ function expect(type, extra) { // When you expect some data to come up.
 				
 				case "set":
 				case "local":
+				case "g_local":
 				case "class":
+				case "arg":
 				case "obj":
 				case "call":
 				case "prop":
@@ -257,6 +259,15 @@ function expect(type, extra) { // When you expect some data to come up.
 					
 					return ["sugar", "local", name, data];
 				
+				case "g_local":
+					
+					var name = expect("name");
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "g_local", name];
+				
 				case "class":
 					
 					var name = expect("name");
@@ -275,6 +286,15 @@ function expect(type, extra) { // When you expect some data to come up.
 					skip();
 					
 					return ["sugar", "class", name, class_constructor, methods];
+				
+				case "arg":
+					
+					var arg = expect("name");
+					
+					prog_c++;
+					skip();
+					
+					return ["sugar", "arg", arg];
 				
 				case "constructor":
 					
@@ -339,8 +359,6 @@ function expect(type, extra) { // When you expect some data to come up.
 				
 				case "obj":
 					
-					var name = expect("name");
-					
 					var object = expect("name");
 					
 					var obj_arguments = [];
@@ -378,7 +396,7 @@ function expect(type, extra) { // When you expect some data to come up.
 				
 				case "f_prop":
 					
-					var name = expect("name");
+					var name = expect("value");
 					
 					var property = expect("name");
 					
