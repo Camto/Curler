@@ -310,7 +310,7 @@ function compile(data) {
 						
 					}
 					
-					return "new " + compile(data[2]) + "(" + obj_arguments + ");";
+					return "new " + compile(data[2]) + "(" + obj_arguments + ")";
 				
 				case "prop":
 					
@@ -358,9 +358,51 @@ function compile(data) {
 					
 					return "function(" + fun_arguments + ") {" + compile(data[3]) + "}";
 				
-				/*case "if":
+				case "if":
 					
-					return;*/
+					var tabs = "";
+					for(var count = 1; count < indentation; count++) {
+						
+						tabs += "\t";
+						
+					}
+					
+					if(data[2][0] != "mini-prog") {
+						
+						var condition = compile(data[2]);
+						
+					} else {
+						
+						var condition = "(function() {\n" + compile(data[2]) + "\n" + tabs + "})()";
+						
+					}
+					
+					return "if(" + condition + ") {\n" + compile(data[3]) + "\n" + tabs + "} else {\n" + compile(data[4]) + "\n" + tabs + "}";
+				
+				case "loop":
+					
+					var tabs = "";
+					for(var count = 1; count < indentation; count++) {
+						
+						tabs += "\t";
+						
+					}
+					
+					if(data[2][0] != "mini-prog") {
+						
+						var condition = compile(data[2]);
+						
+					} else {
+						
+						var condition = "(function() {\n" + compile(data[2]) + "\n" + tabs + "})()";
+						
+					}
+					
+					return "while(" + condition + ") {\n" + compile(data[3]) + "\n" + tabs + "}";
+				
+				case "give":
+					
+					return "return " + compile(data[2]) + ";";
 				
 			}
 		
