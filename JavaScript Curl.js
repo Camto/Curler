@@ -24,6 +24,8 @@ function JSON_to_Curler(JSONed) {
 standard_library = `Curler = {};
 
 Curler["print"] = function(a) {console.log(a); return a;};
+Curler["true"] = true;
+Curler["false"] = false;
 
 Curler["+"] = function(a, b) {return a + b;};
 Curler["-"] = function(a, b) {return a - b;};
@@ -39,6 +41,42 @@ Curler["<"] = function(a, b) {return a < b;}
 Curler[">"] = function(a, b) {return a > b;}
 Curler["<="] = function(a, b) {return a <= b;}
 Curler[">="] = function(a, b) {return a >= b;}
+
+screen = document.createElement("canvas");
+screen.width = 400;
+screen.height = 400;
+draw = screen.getContext("2d");
+draw.textAlign = "center";
+screen.style.position = "absolute";
+screen.style.margin = "auto";
+screen.style.top = "0px";
+screen.style.left = "0px";
+screen.style.bottom = "0px";
+screen.style.right = "0px";
+document.body.appendChild(screen);
+
+Curler["circle"] = function(x, y, r, style) {
+	
+	draw.beginPath();
+	
+	draw.arc(x, y, r, 0, Math.PI * 2);
+	
+	if(style[0]) {
+		
+		screen.fillStyle = style[0];
+		draw.fill();
+		
+	}
+	
+	if(style[1]) {
+		
+		screen.strokeStyle = style[1][0];
+		screen.lineWidth = style[1][1];
+		draw.stroke();
+		
+	}
+	
+}
 
 
 
@@ -301,7 +339,7 @@ function compile(data) {
 						
 					}
 					
-					return compile(data[2]) + '["' + data[3][1] + '"](' + call_arguments + ");";
+					return compile(data[2]) + '["' + data[3][1] + '"](' + call_arguments + ")";
 				
 				case "obj":
 					

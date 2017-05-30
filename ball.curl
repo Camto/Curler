@@ -24,7 +24,7 @@
 	
 	{collide ball_2 (
 		
-		{local dist {v {+ {** {- {g_prop x} {f_prop {arg ball_2} x}}} {** {- {g_prop y} {f_prop {arg ball_2} y}}}}}}
+		{local dist {v {+ {^ {- {g_prop x} {f_prop {arg ball_2} x}} 2} {^ {- {g_prop y} {f_prop {arg ball_2} y}} 2}}}}
 		
 		{if {>= {+ {g_prop r} {f_prop {arg ball_2} r}} {g_local dist}} (
 			
@@ -40,7 +40,7 @@
 	
 	{render (
 		
-		{canvas "circle" {g_prop x} {g_prop y} {g_prop r} "black"}
+		{circle {g_prop x} {g_prop y} {g_prop r} ["black" false]}
 		
 	)}
 	

@@ -1,8 +1,12 @@
 "to use this, the ball class MUST be defined"
 
-{set ball_1 {obj ball 2 2 3}}
-{set ball_2 {obj ball 4 4 3}}
-{set ball_3 {obj ball 10 10 1}}
+{set ball_1 {obj ball 10 10 10}}
+{set ball_2 {obj ball 15 15 10}}
+{set ball_3 {obj ball 40 12.5 10}}
+
+{call ball_1 render}
+{call ball_2 render}
+{call ball_3 render}
 
 {print {call ball_1 collide ball_2}} "prints `true`"
 {print {call ball_1 collide ball_3}} "prints `false`"
