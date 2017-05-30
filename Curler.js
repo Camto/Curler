@@ -372,7 +372,7 @@ function expect(type, extra) { // When you expect some data to come up.
 					prog_c++;
 					skip();
 					
-					return ["sugar", "obj", name, object, obj_arguments];
+					return ["sugar", "obj", object, obj_arguments];
 				
 				case "prop":
 					
